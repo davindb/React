@@ -115,36 +115,35 @@ class App extends Component {
 // 4. Fetch API, using lifecycle method and
 // JSX Component with Arrow Function and JSX extension file
 
-// class App extends Component {
-//   constructor() {
-//     super();
+class App extends Component {
+  constructor() {
+    super();
 
-//     this.state = {
-//       monsters: [],
-//     };
-//   }
+    this.state = {
+      monsters: [],
+    };
+  }
 
-//   // This will run after the render() mounted to the browser
-//   componentDidMount() {
-//     fetch('https://jsonplaceholder.typicode.com/users')
-//       .then(response => response.json())
-//       .then(data => this.setState({ monsters: data }));
-//   }
-//   // Use comma after fetch url to write the header, content-type, data, etc.
+  // This will run after the render() mounted to the browser
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => this.setState({ monsters: data }));
+  }
+  // Use comma after fetch url to write the header, content-type, data, etc.
 
-//   render() {
-//     return (
-//       <div className="App">
-//         <CardList name="Yihua">
-//           {this.state.monsters.map((monster, i) => (
-//             <h1 key={monster.id}>{monster.name}</h1>
-//           ))}
-//         </CardList>
-//       </div>
-//     );
-//   }
-// }
-*/
+  render() {
+    return (
+      <div className="App">
+        <CardList name="Yihua">
+          {this.state.monsters.map((monster, i) => (
+            <h1 key={monster.id}>{monster.name}</h1>
+          ))}
+        </CardList>
+      </div>
+    );
+  }
+}
 
 //============================================================================
 
@@ -175,5 +174,44 @@ class App extends Component {
     );
   }
 }
+*/
+//============================================================================
 
+// 6. Create a Search Field
+
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      monsters: [],
+      searchField: '',
+    };
+  }
+
+  // This will run after the render() mounted to the browser
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => this.setState({ monsters: data }));
+  }
+  // Use comma after fetch url to write the header, content-type, data, etc.
+
+  render() {
+    return (
+      <div className="App">
+        <input
+          type="search"
+          placeholder="Search monsters"
+          onChange={e =>
+            this.setState({ searchField: e.target.value }, () =>
+              console.log(this.state.searchField)
+            )
+          }
+        />
+        <CardList monsters={this.state.monsters} />
+      </div>
+    );
+  }
+}
 export default App;

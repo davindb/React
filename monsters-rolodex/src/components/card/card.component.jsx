@@ -3,7 +3,7 @@ import './card.styles.css';
 
 // Exercise 5, exporting a component { Card }
 export const Card = props => {
-  console.log(props);
+  //   console.log(props);
   return (
     <div className="card-container">
       <img
