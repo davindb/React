@@ -290,13 +290,13 @@ class App extends Component {
   }
   // Use comma after fetch url to write the header, content-type, data, etc.
 
-  // HERE IS NOT GONNA WORK. BECAUSE THE THIS KEYWORD IS ATTACHED TO WHERE THIS FUNCTION IS DEFINED
+  // HERE IS NOT GONNA WORK. BECAUSE THE THIS KEYWORD WILL ATTACH TO THE SEARCHBOX HTML ELEMENT
   // handleChanges(e) {
   //   console.log(this);
   //   return this.setState({ searchField: e.target.value });
   // }
 
-  // IT'S DIFFERENT WITH ARROW FUNCTION. IT'S LEXICAL SCOPE. ARROW FUNCTION WILL FIND SETSTATE UNTIL IT'S PARENT CLASS WHICH IS "COMPONENT"
+  // IT'S DIFFERENT WITH ARROW FUNCTION. IT'S LEXICAL SCOPE. ARROW FUNCTION WILL FIND SETSTATE UNTIL ITS PARENT CLASS WHICH IS "COMPONENT"
   handleChange = e => {
     console.log(this);
     return this.setState({ searchField: e.target.value });
@@ -310,6 +310,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <h1>Monster Rolodex</h1>
         <SearchBox
           placeholder="Search monster"
           handleChange={this.handleChange}
