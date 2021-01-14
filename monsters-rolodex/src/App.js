@@ -222,7 +222,7 @@ class App extends Component {
     );
   }
 }
-*/
+
 //============================================================================
 
 // 8. Create a SearchBox Component
@@ -261,6 +261,58 @@ class App extends Component {
               console.log(this.state.searchField)
             )
           }
+        />
+        <CardList monsters={filteredMonsters} />
+      </div>
+    );
+  }
+}
+*/
+//============================================================================
+
+// 9. Create a handleChange Method
+
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      monsters: [],
+      searchField: '',
+    };
+  }
+
+  // This will run after the render() mounted to the browser
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => this.setState({ monsters: data }));
+  }
+  // Use comma after fetch url to write the header, content-type, data, etc.
+
+  // HERE IS NOT GONNA WORK. BECAUSE THE THIS KEYWORD IS ATTACHED TO WHERE THIS FUNCTION IS DEFINED
+  // handleChanges(e) {
+  //   console.log(this);
+  //   return this.setState({ searchField: e.target.value });
+  // }
+
+  // IT'S DIFFERENT WITH ARROW FUNCTION. IT'S LEXICAL SCOPE. ARROW FUNCTION WILL FIND SETSTATE UNTIL IT'S PARENT CLASS WHICH IS "COMPONENT"
+  handleChange = e => {
+    console.log(this);
+    return this.setState({ searchField: e.target.value });
+  };
+
+  render() {
+    const { monsters, searchField } = this.state;
+    const filteredMonsters = monsters.filter(monster =>
+      monster.name.toLowerCase().includes(searchField.toLowerCase())
+    );
+
+    return (
+      <div className="App">
+        <SearchBox
+          placeholder="Search monster"
+          handleChange={this.handleChange}
         />
         <CardList monsters={filteredMonsters} />
       </div>
