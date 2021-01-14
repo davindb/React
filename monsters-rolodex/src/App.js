@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { CardList } from './components/card-list/card-list.component.jsx';
+import { SearchBox } from './components/search-box/search-box.component.jsx';
 
 /*
 // 1. Constructor Function
@@ -174,7 +175,7 @@ class App extends Component {
     );
   }
 }
-*/
+
 //============================================================================
 
 // 6. Create a Search Field
@@ -221,4 +222,50 @@ class App extends Component {
     );
   }
 }
+*/
+//============================================================================
+
+// 8. Create a SearchBox Component
+
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      monsters: [],
+      searchField: '',
+    };
+  }
+
+  // This will run after the render() mounted to the browser
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => this.setState({ monsters: data }));
+  }
+  // Use comma after fetch url to write the header, content-type, data, etc.
+
+  render() {
+    const { monsters, searchField } = this.state;
+    const filteredMonsters = monsters.filter(monster =>
+      monster.name.toLowerCase().includes(searchField.toLowerCase())
+    );
+    console.log(searchField.toLowerCase());
+    console.log(filteredMonsters);
+    return (
+      <div className="App">
+        <SearchBox
+          placeholder="Search monster"
+          handleChange={e =>
+            this.setState({ searchField: e.target.value }, () =>
+              console.log(this.state.searchField)
+            )
+          }
+        />
+        <CardList monsters={filteredMonsters} />
+      </div>
+    );
+  }
+}
+
 export default App;
