@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { Component } from 'react';
+import './App.css';
+import { CardList } from './components/card-list/card-list.component.jsx';
 
 /*
 // 1. Constructor Function
@@ -63,7 +63,7 @@ class App extends Component {
     );
   }
 }
-*/
+
 //  ============================================================================
 
 // 3. map method and key attribute
@@ -75,16 +75,16 @@ class App extends Component {
     this.state = {
       monsters: [
         {
-          name: "Frankenstein",
-          id: "m1",
+          name: 'Frankenstein',
+          id: 'm1',
         },
         {
-          name: "Dracula",
-          id: "m2",
+          name: 'Dracula',
+          id: 'm2',
         },
         {
-          name: "Zombie",
-          id: "m1",
+          name: 'Zombie',
+          id: 'm1',
         },
       ],
     };
@@ -93,11 +93,58 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.monsters.map((monster) => (
+        {this.state.monsters.map((monster, i) => (
           <h1 key={monster.id}>{monster.name}</h1>
         ))}
+        <button
+          onClick={() =>
+            this.setState(() =>
+              this.state.monsters.map(monster => (monster.name = 'Davin'))
+            )
+          }
+        >
+          Hit this
+        </button>
       </div>
     );
   }
 }
+*/
+//  ============================================================================
+
+// 4. Fetch API, using lifecycle method and
+// JSX Component with Arrow Function and JSX extension file
+
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      monsters: [],
+    };
+  }
+
+  // This will run after the render() mounted to the browser
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => this.setState({ monsters: data }));
+  }
+  // Use comma after fetch url to write the header, content-type, data, etc.
+
+  render() {
+    return (
+      <div className="App">
+        <CardList name="Yihua">
+          {this.state.monsters.map((monster, i) => (
+            <h1 key={monster.id}>{monster.name}</h1>
+          ))}
+        </CardList>
+      </div>
+    );
+  }
+}
+
+//============================================================================
+
 export default App;
