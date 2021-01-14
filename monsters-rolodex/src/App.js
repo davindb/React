@@ -178,6 +178,7 @@ class App extends Component {
 //============================================================================
 
 // 6. Create a Search Field
+// 7. Create a filter() to filter monsters with the search box
 
 class App extends Component {
   constructor() {
@@ -198,6 +199,12 @@ class App extends Component {
   // Use comma after fetch url to write the header, content-type, data, etc.
 
   render() {
+    const { monsters, searchField } = this.state;
+    const filteredMonsters = monsters.filter(monster =>
+      monster.name.toLowerCase().includes(searchField.toLowerCase())
+    );
+    console.log(searchField.toLowerCase());
+    console.log(filteredMonsters);
     return (
       <div className="App">
         <input
@@ -209,7 +216,7 @@ class App extends Component {
             )
           }
         />
-        <CardList monsters={this.state.monsters} />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
