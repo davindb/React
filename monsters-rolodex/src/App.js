@@ -109,11 +109,46 @@ class App extends Component {
     );
   }
 }
-*/
+
 //  ============================================================================
 
 // 4. Fetch API, using lifecycle method and
 // JSX Component with Arrow Function and JSX extension file
+
+// class App extends Component {
+//   constructor() {
+//     super();
+
+//     this.state = {
+//       monsters: [],
+//     };
+//   }
+
+//   // This will run after the render() mounted to the browser
+//   componentDidMount() {
+//     fetch('https://jsonplaceholder.typicode.com/users')
+//       .then(response => response.json())
+//       .then(data => this.setState({ monsters: data }));
+//   }
+//   // Use comma after fetch url to write the header, content-type, data, etc.
+
+//   render() {
+//     return (
+//       <div className="App">
+//         <CardList name="Yihua">
+//           {this.state.monsters.map((monster, i) => (
+//             <h1 key={monster.id}>{monster.name}</h1>
+//           ))}
+//         </CardList>
+//       </div>
+//     );
+//   }
+// }
+*/
+
+//============================================================================
+
+// 5. Create a Card Component
 
 class App extends Component {
   constructor() {
@@ -135,16 +170,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <CardList name="Yihua">
-          {this.state.monsters.map((monster, i) => (
-            <h1 key={monster.id}>{monster.name}</h1>
-          ))}
-        </CardList>
+        <CardList monsters={this.state.monsters} />
       </div>
     );
   }
 }
-
-//============================================================================
 
 export default App;
