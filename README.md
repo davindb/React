@@ -1,9 +1,2 @@
-# Udemy
-These are Davin's Udemy Projects Repository.
-Inside here:
-- Learning JavaScript.
-- Learning React.
-- Learning HTML and CSS.
-- Learning SASS.
-- Learning Web Development.
-- Learning Python.
+# React
+This is my react learning projects.
