@@ -22,7 +22,6 @@ function App() {
     </div>
   );
 }
-*/
 
 //  ============================================================================
 
@@ -64,5 +63,41 @@ class App extends Component {
     );
   }
 }
+*/
+//  ============================================================================
 
+// 3. map method and key attribute
+
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      monsters: [
+        {
+          name: "Frankenstein",
+          id: "m1",
+        },
+        {
+          name: "Dracula",
+          id: "m2",
+        },
+        {
+          name: "Zombie",
+          id: "m1",
+        },
+      ],
+    };
+  }
+
+  render() {
+    return (
+      <div className="App">
+        {this.state.monsters.map((monster) => (
+          <h1 key={monster.id}>{monster.name}</h1>
+        ))}
+      </div>
+    );
+  }
+}
 export default App;
